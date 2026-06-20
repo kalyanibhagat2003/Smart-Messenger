@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-
 import UserList from "./Components/sidebar/UserList";
 import ChatWindow from "./Components/chat/ChatWindow";
+import { getAIReply } from "./services/aiService";
 
 function App() {
 
@@ -35,101 +35,81 @@ function App() {
 
   }, [messages]);
 
-  function sendMessage() {
+ async function sendMessage() {
 
-    if (!selectedUser) return;
+  if (!selectedUser) return;
 
-    if (message.trim() === "") return;
+  if (message.trim() === "") return;
 
-    const userMessage = {
+  const currentUser = selectedUser;
 
-      text: message,
+  const userText = message;
 
-      time: new Date().toLocaleTimeString([], {
+  const userMessage = {
 
-        hour: "2-digit",
+    text: userText,
 
-        minute: "2-digit",
+    time: new Date().toLocaleTimeString([], {
 
-      }),
+      hour: "2-digit",
 
-      sender: "me",
+      minute: "2-digit",
 
-    };
+    }),
 
-    setMessages((prev) => ({
+    sender: "me",
 
-      ...prev,
+  };
 
-      [selectedUser.id]: [
+  setMessages((prev) => ({
 
-        ...(prev[selectedUser.id] || []),
+    ...prev,
 
-        userMessage,
+    [currentUser.id]: [
 
-      ],
+      ...(prev[currentUser.id] || []),
 
-    }));
+      userMessage,
 
-    const currentUser = selectedUser;
+    ],
 
-    setMessage("");
+  }));
 
-    setTimeout(() => {
+  setMessage("");
 
-      const replies = [
+  const aiReply = await getAIReply(userText);
 
-        "Hi 👋",
+  const replyMessage = {
 
-        "How are you? 😊",
+    text: aiReply,
 
-        "That's nice 👍",
+    time: new Date().toLocaleTimeString([], {
 
-        "Okay 😄",
+      hour: "2-digit",
 
-        "Sounds good 🔥",
+      minute: "2-digit",
 
-        "See you later 👋",
+    }),
 
-      ];
+    sender: "other",
 
-      const randomReply =
+  };
 
-        replies[Math.floor(Math.random() * replies.length)];
+  setMessages((prev) => ({
 
-      const replyMessage = {
+    ...prev,
 
-        text: randomReply,
+    [currentUser.id]: [
 
-        time: new Date().toLocaleTimeString([], {
+      ...(prev[currentUser.id] || []),
 
-          hour: "2-digit",
+      replyMessage,
 
-          minute: "2-digit",
+    ],
 
-        }),
+  }));
 
-        sender: "other",
-
-      };
-
-      setMessages((prev) => ({
-
-        ...prev,
-
-        [currentUser.id]: [
-
-          ...(prev[currentUser.id] || []),
-
-          replyMessage,
-
-        ],
-
-      }));
-
-    }, 1000);
-
-  }
+}
 
   return (
 
