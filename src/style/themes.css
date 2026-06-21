@@ -1,0 +1,145 @@
+.theme-selector{
+
+  position:absolute;
+
+  top:15px;
+
+  right:20px;
+
+  display:flex;
+
+  gap:10px;
+}
+
+.theme-selector button{
+
+  padding:10px 14px;
+
+  border:none;
+
+  border-radius:20px;
+
+  cursor:pointer;
+
+  font-size:14px;
+}
+
+/* Instagram */
+
+.instagram{
+
+  background:#fafafa;
+}
+
+.instagram .sidebar{
+
+  background:white;
+}
+
+.instagram .chat{
+
+  background:#fafafa;
+}
+
+.instagram .search-box,
+
+.instagram input{
+
+  background:white;
+
+  border:1px solid #dbdbdb;
+}
+
+.instagram button{
+
+  background:#0095f6;
+
+  color:white;
+}
+
+/* WhatsApp */
+
+.whatsapp{
+
+  background:#ece5dd;
+}
+
+.whatsapp .sidebar{
+
+  background:white;
+}
+
+.whatsapp .chat{
+
+  background:#d9fdd3;
+}
+
+.whatsapp .my-message{
+
+  background:#25d366;
+}
+
+.whatsapp .other-message{
+
+  background:white;
+
+  color:black;
+}
+
+/* Neon */
+
+.neon{
+
+  background:#121212;
+
+  color:white;
+}
+
+.neon .sidebar{
+
+  background:#1e1e1e;
+}
+
+.neon .chat{
+
+  background:#181818;
+}
+
+.neon .search-box,
+
+.neon input{
+
+  background:#2b2b2b;
+
+  color:white;
+
+  border:1px solid #444;
+}
+
+.neon .my-message{
+
+  background:#8b5cf6;
+}
+
+.neon .other-message{
+
+  background:#2b2b2b;
+
+  color:white;
+}
+
+.neon .contact:hover{
+
+  background:#2b2b2b;
+}
+
+@media(max-width:768px){
+
+  .theme-selector{
+
+    position:static;
+
+    margin:10px;
+  }
+
+}

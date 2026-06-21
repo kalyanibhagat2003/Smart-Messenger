@@ -1,0 +1,44 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+}
+
+.container{
+  display:flex;
+  height:100vh;
+}
+
+@media(max-width:768px){
+
+  .container{
+
+    flex-direction:column;
+  }
+
+}
+
+.logout-btn{
+
+  position:absolute;
+
+  top:70px;
+
+  right:20px;
+
+  padding:10px 15px;
+
+  border:none;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  background:#ff4d4d;
+
+  color:white;
+}

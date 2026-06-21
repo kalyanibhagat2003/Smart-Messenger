@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import UserList from "./Components/sidebar/UserList";
 import ChatWindow from "./Components/chat/ChatWindow";
 import { getAIReply } from "./services/aiService";
+import Auth from "./Components/auth/Auth";
 
 function App() {
 
@@ -10,6 +11,14 @@ function App() {
   const [message, setMessage] = useState("");
 
   const [darkMode, setDarkMode] = useState(false);
+
+  const [theme, setTheme] = useState("instagram");
+
+   const [isLoggedIn, setIsLoggedIn] = useState(
+
+    localStorage.getItem("isLoggedIn") === "true"
+
+  );
 
   // Load saved messages
 
@@ -111,10 +120,32 @@ function App() {
 
 }
 
+if (!isLoggedIn) {
+
   return (
 
-    <div className={darkMode ? "container dark" : "container"}>
+    <Auth
 
+      setIsLoggedIn={setIsLoggedIn}
+
+    />
+
+  );
+
+}
+
+function logout() {
+
+  localStorage.removeItem("isLoggedIn");
+
+  setIsLoggedIn(false);
+
+}
+
+  return (
+
+    <div className={`container ${theme}`}>
+    
       <button
 
         className="theme-btn"
@@ -126,6 +157,46 @@ function App() {
         {darkMode ? "☀️ Light" : "🌙 Dark"}
 
       </button>
+
+      <div className="theme-selector">
+
+  <button
+    onClick={() => setTheme("instagram")}
+  >
+
+    📸 Instagram
+
+  </button>
+
+  <button
+    onClick={() => setTheme("whatsapp")}
+  >
+
+    💚 WhatsApp
+
+  </button>
+
+  <button
+    onClick={() => setTheme("neon")}
+  >
+
+    🖤 Neon
+
+  </button>
+
+ <button
+
+  className="logout-btn"
+
+  onClick={logout}
+
+>
+
+  🚪 Logout
+
+</button>
+
+</div>
 
       <UserList
 
